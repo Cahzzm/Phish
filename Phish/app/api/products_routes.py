@@ -4,23 +4,23 @@ from app.models import Product
 from app.forms import product_form
 
 
-product_routes = Blueprint('product', __name__)
+products_routes = Blueprint('product', __name__)
 
 
-@product_routes.route('/')
+@products_routes.route('/')
 def get_all_products():
     all_products = Product.query.all()
     return {'products': [one_product.to_dict() for one_product in all_products]}
 
 
-@product_routes.route('/<int:id>')
+@products_routes.route('/<int:id>')
 def get_one_product(id):
     product = Product.query.get(id)
     one_product = product.to_dict()
     return {'product': one_product}
 
 
-@product_routes.route('/', methods=['POST'])
+@products_routes.route('/', methods=['POST'])
 @login_required
 def create_product():
     form = ProductForm()
