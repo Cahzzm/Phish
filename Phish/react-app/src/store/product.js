@@ -2,7 +2,7 @@
 
 const LOAD_ALL_PRODUCTS = 'products/LOAD_ALL_PRODUCTS'
 const LOAD_ONE_PRODUCT = 'products/LOAD_ONE_PRODUCT'
-const ADD_PRODUCT = 'products/DD_PRODUCT'
+// const ADD_PRODUCT = 'products/DD_PRODUCT'
 
 
 const loadAllProducts = products => ({
@@ -15,10 +15,10 @@ const loadOneProduct = product => ({
     product
 })
 
-const addProduct = product => ({
-    type: ADD_PRODUCT,
-    product
-})
+// const addProduct = product => ({
+//     type: ADD_PRODUCT,
+//     product
+// })
 
 
 export const getProductsThunk = () => async dispatch => {
@@ -40,19 +40,23 @@ export const getOneProductThunk = (productId) => async dispatch => {
     }
 }
 
-export const createProductThunk = (payload) => async dispatch => {
-    const response = await fetch(`/api/products`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    })
+// export const createProductThunk = (payload) => async dispatch => {
+//     const response = await fetch(`/api/products`, {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(payload)
+//     })
 
-    if(response.ok) {
-        const newProduct = await response.json()
-        dispatch(addProduct(newProduct))
-        return newProduct
-    }
-}
+//     console.log('this is payload in thunk' ,payload)
+//     console.log('this is response')
+
+//     if(response.ok) {
+//         const newProduct = await response.json()
+//         console.log('New product in thunk',newProduct)
+//         dispatch(addProduct(newProduct))
+//         return newProduct
+//     }
+// }
 
 
 const initialState = {
@@ -65,7 +69,6 @@ const productsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ALL_PRODUCTS: {
             const allProductsState = {}
-            console.log('-----------------',action.products)
             action.products.products.forEach(product => (
                 allProductsState[product.id] = product
             ))
@@ -83,12 +86,13 @@ const productsReducer = (state = initialState, action) => {
             }
         }
 
-        case ADD_PRODUCT: {
-            return {
-                ...state,
-                [action.product.id]: action.product
-            }
-        }
+        // case ADD_PRODUCT: {
+        //     console.log(action.product)
+        //     return {
+        //         ...state,
+        //         [action.product.product.id]: action.product.product
+        //     }
+        // }
 
         default:
             return state

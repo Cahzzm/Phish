@@ -10,7 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Products from './components/Products';
 import ProductDetails from './components/SingleProduct';
-import CreateProduct from './components/CreateProduct';
+// import CreateProduct from './components/CreateProduct';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,14 +43,14 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <Route path='/' exact={true} >
+        <Route path='/' exact >
           <Products />
         </Route>
-        <Route path='/products/:productId' exact={true}>
-          <ProductDetails />
-        </Route>
-        <Route path='/products/new' exact={true}>
+        {/* <Route path='/products/new'>
           <CreateProduct />
+        </Route> */}
+        <Route path='/products/:productId'>
+          <ProductDetails />
         </Route>
       </Switch>
     </BrowserRouter>
