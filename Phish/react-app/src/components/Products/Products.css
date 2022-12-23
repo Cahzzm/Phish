@@ -1,0 +1,19 @@
+.main-all-products {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-family: sans-serif;
+}
+
+.all-products-container {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    line-height: 1.15;
+}
+
+.single-product-card {
+    width: 210px;
+    padding-top: 20px;
+    margin: 10px;
+}

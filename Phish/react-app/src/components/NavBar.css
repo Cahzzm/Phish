@@ -1,0 +1,33 @@
+html, body {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    border: none;
+    color: inherit;
+}
+
+.navbar-container {
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    border-bottom: 2px solid rgb(220, 229, 233);
+    align-items: center;
+}
+
+.phish-home-button {
+    margin: 20px;
+    font-family: sans-serif;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+
+.right-side-navbar {
+    margin: 20px;
+    font-family: sans-serif;
+}

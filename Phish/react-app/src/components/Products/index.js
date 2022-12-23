@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getProductsThunk } from '../../store/product'
 import { NavLink } from 'react-router-dom'
+import './Products.css'
 
 
 
@@ -18,22 +19,22 @@ const Products = () => {
 
 
     return (
-        <main>
-            <ul>
+        <main className='main-all-products'>
+            <div className='all-products-container'>
                 {allProducts.map(product => (
-                    <li key={product.id}>
+                    <div key={product.id} className='single-product-card'>
                         <NavLink to={`products/${product.id}`}>
                             {product.name}
-                        </NavLink>
                         <p>
                             {product.description}
                         </p>
                         <p>
                             {product.price}
                         </p>
-                    </li>
+                        </NavLink>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </main>
     )
 }
