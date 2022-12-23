@@ -2,6 +2,7 @@
 
 const LOAD_ALL_PRODUCTS = 'products/LOAD_ALL_PRODUCTS'
 const LOAD_ONE_PRODUCT = 'products/LOAD_ONE_PRODUCT'
+const ADD_PRODUCT = 'products/DD_PRODUCT'
 
 
 const loadAllProducts = products => ({
@@ -11,6 +12,11 @@ const loadAllProducts = products => ({
 
 const loadOneProduct = product => ({
     type: LOAD_ONE_PRODUCT,
+    product
+})
+
+const addProduct = product => ({
+    type: ADD_PRODUCT,
     product
 })
 
@@ -31,6 +37,20 @@ export const getOneProductThunk = (productId) => async dispatch => {
     if(response.ok) {
         const product = await response.json()
         dispatch(loadOneProduct(product))
+    }
+}
+
+export const createProductThunk = (payload) => async dispatch => {
+    const response = await fetch(`/api/products`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    })
+
+    if(response.ok) {
+        const newProduct = await response.json()
+        dispatch(addProduct(newProduct))
+        return newProduct
     }
 }
 
@@ -60,6 +80,13 @@ const productsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 singleProduct: action.product.product
+            }
+        }
+
+        case ADD_PRODUCT: {
+            return {
+                ...state,
+                [action.product.id]: action.product
             }
         }
 
