@@ -10,7 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Products from './components/Products';
 import ProductDetails from './components/SingleProduct';
-// import CreateProduct from './components/CreateProduct';
+import CreateProduct from './components/CreateProduct';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,9 +46,9 @@ function App() {
         <Route path='/' exact >
           <Products />
         </Route>
-        {/* <Route path='/products/new'>
+        <Route path='/products/new'>
           <CreateProduct />
-        </Route> */}
+        </Route>
         <Route path='/products/:productId'>
           <ProductDetails />
         </Route>
