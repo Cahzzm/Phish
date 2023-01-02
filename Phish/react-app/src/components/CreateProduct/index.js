@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom/cjs/react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { createProductThunk } from '../../store/product'
+import { createProductThunk } from '../../store/all_products'
+import './CreateProduct.css'
 
 
 const CreateProduct = () => {
@@ -12,7 +13,7 @@ const CreateProduct = () => {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
-    // const [errorValidations, setErrorValidations] = useState([])
+    const [errors, setErrors] = useState([])
 
 
     const handleSubmit = async (e) => {
@@ -20,55 +21,69 @@ const CreateProduct = () => {
 
         const newProduct = await dispatch (
             createProductThunk({
-            name,
-            description,
-            price
+                name,
+                description,
+                price
             })
         )
-
-
-
-        history.push(`/products/${newProduct?.id}`)
+        if (newProduct) {
+            newProduct.errors ? setErrors(newProduct.errors) : history.push(`/products/${newProduct.id}`)
+        }
     }
 
 
     return (
-        <main>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    Name
-                    <input
-                        type='text'
-                        placeholder='Name'
-                        value={name}
-                        onChange={e => setName(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Description
-                    <input
-                        type='text'
-                        placeholder='Description'
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Price
-                    <input
-                        type='number'
-                        placeholder='Price'
-                        value={price}
-                        onChange={e => setPrice(e.target.value)}
-                    />
-                </label>
-                <button type='submit'>
+        <main className='product-form-main'>
+            <form  className='product-add-form' onSubmit={handleSubmit}>
+                <div className='product-form-details-container'>
+                    <div className='product-form-header'>
+                        Listing Details
+                    </div>
+                    <div className='product-form-name-container'>
+                        <label>
+                            Name
+                        </label>
+                            <input
+                                type='text'
+                                placeholder='Be clear, concise, and descriptive of the product being sold'
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                    </div>
+                    <div className='product-form-description-container'>
+                        <label>
+                            Description
+                        </label>
+                            <textarea
+                                type='textarea'
+                                placeholder='Add details about your product to increase sales'
+                                value={description}
+                                onChange={e => setDescription(e.target.value)}
+                            />
+                    </div>
+                    <div className='product-form-price-container'>
+                        <label>
+                            Price
+                        </label>
+                            <input
+                                type='number'
+                                placeholder='Price'
+                                value={price}
+                                onChange={e => setPrice(e.target.value)}
+                            />
+                    </div>
+                </div>
+            </form>
+            <div className='product-form-btn-container'>
+                <button className='create-product-btn' type='submit'>
                     Add to Listings
                 </button>
-                <Link exact to='/'>
-                    Cancel
-                </Link>
-            </form>
+                <div className='product-form-cancel'>
+                    <Link exact to='/'>
+                        Cancel
+                    </Link>
+                </div>
+            </div>
         </main>
     )
 }

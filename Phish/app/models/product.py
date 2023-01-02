@@ -2,53 +2,51 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 
 class Product(db.Model):
-    __tablename__ = 'products'
+    __tablename__ = "products"
 
-    if environment == 'production':
+    if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(300), nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.String(2000))
+    owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+    preview_img_id = db.Column(db.Integer, nullable=False)
+    cart_img_url = db.Column(db.String(1000))
 
-    products_cart = db.relationship('Cart', back_populates='cart_products')
-    product_images = db.relationship('ProductImage', back_populates='images_product', cascade='all, delete')
-    product_owner = db.relationship('User', back_populates='user_products')
-
+    product_owner = db.relationship("User", back_populates="user_products")
+    cart_item = db.relationship("CartItem", back_populates="product", cascade="all, delete")
+    product_images = db.relationship("ProductImage", back_populates="image_product", cascade="all, delete")
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'ownerId': self.owner_id,
-            'name': self.name,
-            'description': self.description,
-            'price': self.price,
-            'productImages': {
-                product_image.to_dict()['id']: product_image.to_dict() for product_image in self.product_images
-            }
+            "id": self.id,
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "previewImgId": self.preview_img_id,
+            "productOwner": self.product_owner.to_dict(),
+            "productImages": {image.to_dict()["id"]: image.to_dict() for image in self.product_images},
+            "cartImgUrl": self.cart_img_url
         }
 
 
 class ProductImage(db.Model):
-    __tablename__ = 'product_images'
+    __tablename__ = "product_images"
 
-    if environment == 'production':
+    if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('products.id')), nullable=False)
-    url = db.Column(db.String(255), nullable=False)
-    preview = db.Column(db.Boolean, nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
+    url = db.Column(db.String(1500), nullable=False)
 
-    images_product = db.relationship('Product', back_populates='product_images')
-
+    image_product = db.relationship("Product", back_populates="product_images")
 
     def to_dict(self):
         return {
-            'id': self.id,
-            'productId': self.product_id,
-            'url': self.url,
-            'preview': self.preview
+            "id": self.id,
+            "productId": self.product_id,
+            "url": self.url
         }

@@ -1,84 +1,97 @@
-from flask import Blueprint, jsonify
-from flask_login import current_user, login_required
-from app.models import Product
-from app.forms import ProductForm, UpdateProductForm
+from flask import Blueprint, jsonify, render_template, request, redirect
+from flask_login import login_required, current_user
+from app.models import db, Product, ProductImage
+from app.forms import ProductUpdateForm, ProductForm
+from .auth_routes import validation_errors_to_error_messages
 
 
-products_routes = Blueprint('products', __name__)
+products_routes = Blueprint("products", __name__)
 
 
 # GET ALL PRODUCTS
-@products_routes.route('/')
-def get_all_products():
+@products_routes.route("")
+def get_products():
+    products = Product.query.all()
+    return {"Products": [product.to_dict() for product in products]}
 
-    all_products = Product.query.all()
-    return {'products': [one_product.to_dict() for one_product in all_products]}
 
-
-# GET ONE PRODUCT
-@products_routes.route('/<int:id>')
+# GET A SINGLE PRODUCT
+@products_routes.route("/<int:id>")
 def get_one_product(id):
+    product = Product.query.get(id)
+    return product.to_dict()
 
-    one_product = Product.query.get(id)
-    return one_product.to_dict()
 
-
-# ADD PRODUCT
-@products_routes.route('/', methods=['POST'])
+# CREATE A NEW PRODUCT
+@products_routes.route("", methods=["POST"])
 @login_required
-def create_product():
-    # print("ami in the route?????????????????????????????????????????????????")
+def post_product():
     form = ProductForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
+    form["csrf_token"].data = request.cookies["csrf_token"]
+    if form.validate_on_submit():
+        data = form.data
 
-    if form.validat_on_submit():
-        owner = current_user
-        # all_products = Product.query.all()
         new_product = Product(
-            owner_id=owner.id,
-            name=form.data['name'],
-            description=form.data['description'],
-            price=form.data['price']
+            name=data["name"],
+            description=data["description"],
+            owner_id=current_user.get_id(),
+            price=data["price"],
+            preview_img_id=0,
         )
 
-        # all_products.append(new_product)
         db.session.add(new_product)
+        db.session.commit()
+
+        new_preview_img = ProductImage(
+            product_id=new_product.to_dict()["id"], url=data["preview_img_url"]
+        )
+
+        db.session.add(new_preview_img)
+        db.session.commit()
+
+        setattr(new_product, "preview_img_id", new_preview_img.to_dict()["id"])
+
         db.session.commit()
 
         return new_product.to_dict()
     print(validation_errors_to_error_messages(form.errors))
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 403
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 403
 
 
-# UPDATE PRODUCT
-@products_routes.route('/<int:id>/edit', methohds=['PUT'])
+# UPDATE A SINGLE PRODUCT
+@products_routes.route("/<int:id>/update", methods=["PUT"])
 @login_required
 def update_product(id):
     product = Product.query.get(id)
-    product_edit = product.to_dict()
+    product_dict = product.to_dict()
 
-    form = UpdateProductForm(
-        name=product_edit['name']
-        description=product_edit['description']
-        price=product_edit['price']
+    form = ProductUpdateForm(
+        name=product_dict["name"],
+        description=product_dict["description"],
+        detailed_description=product_dict["detailedDescription"],
+        category_id=product_dict["categoryId"],
+        price=product_dict["price"],
     )
-    form['csrf_token'].data = request.cookies['csrf_token']
+
+    form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
-        setattr(product, 'name', form.data['title'])
-        setattr(product, 'description', form.data['description'])
-        setattr(product, 'price', form.data['price'])
+        data = form.data
+
+        setattr(product, "name", data["name"])
+        setattr(product, "description", data["description"])
+        setattr(product, "price", data["price"])
 
         db.session.commit()
         return product.to_dict()
     print(validation_errors_to_error_messages(form.errors))
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 403
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 403
 
 
-# DELETE A PRODUCT
-@products_routes.route('/<int:id>', methods=['DELETE'])
+# DELETE A SINGLE PRODUCT
+@products_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_product(id):
     product = Product.query.get(id)
     db.session.delete(product)
     db.session.commit()
-    return {'message': 'Successfully deleted'}, 200
+    return {"message": "Successfully deleted", "status_code": 200}
