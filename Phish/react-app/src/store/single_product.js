@@ -1,5 +1,5 @@
-const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE';
-const UPDATE_SINGLE_PRODUCT = 'products/UPDATE_SINGLE';
+const LOAD_SINGLE_PRODUCT = 'products/LOAD';
+const UPDATE_SINGLE_PRODUCT = 'products/UPDATE';
 
 export const loadSingleProduct = product => {
   return {
@@ -16,7 +16,7 @@ export const updateSingleProduct = updatedProduct => {
 };
 
 
-export const getSingleProduct = productId => async dispatch => {
+export const getSingleProductThunk = productId => async dispatch => {
   const response = await fetch(`/api/products/${productId}`);
 
   if (response.ok) {
@@ -26,12 +26,12 @@ export const getSingleProduct = productId => async dispatch => {
   }
 };
 
-export const putSingleProduct = product => async dispatch => {
-  const { title, description, detailed_description, category_id, price } = product;
+export const putSingleProductThunk = product => async dispatch => {
+  const { name, description, price } = product;
   const response = await fetch(`/api/products/${product.id}/update`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ title, description, detailed_description, category_id, price })
+    body: JSON.stringify({ name, description, price })
   });
 
   if (response.ok) {
@@ -43,7 +43,7 @@ export const putSingleProduct = product => async dispatch => {
   return data;
 };
 
-export const postProductImage = (productId, url) => async dispatch => {
+export const postProductImageThunk = (productId, url) => async dispatch => {
   const response = await fetch(`/api/images/${productId}/new`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,7 @@ export const postProductImage = (productId, url) => async dispatch => {
   return data;
 };
 
-export const deleteProductImage = productImageId => async dispatch => {
+export const deleteProductImageThunk = productImageId => async dispatch => {
   const response = await fetch(`/api/images/${productImageId}`, {
     method: 'DELETE',
     headers: {
@@ -72,7 +72,7 @@ export const deleteProductImage = productImageId => async dispatch => {
   }
 };
 
-export const putProductImage = (productImageId, url) => async dispatch => {
+export const putProductImageThunk = (productImageId, url) => async dispatch => {
   const response = await fetch(`/api/images/${productImageId}/update`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -86,6 +86,7 @@ export const putProductImage = (productImageId, url) => async dispatch => {
   const data = await response.json()
   return data;
 };
+
 
 export const getProductById = id => state => state.products[id];
 

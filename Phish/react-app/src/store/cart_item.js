@@ -1,6 +1,7 @@
-const CREATE_CART_ITEM = "cart_items/NEW";
+const CREATE_CART_ITEM = "cart_items/Create";
 const UPDATE_CART_ITEM = "cart_items/UPDATE";
 const DELETE_CART_ITEM = "cart_items/DELETE";
+
 
 export const createCartItem = (cartItem) => {
     return {
@@ -23,11 +24,11 @@ export const deleteCartItem = (cartItemId) => {
     };
 };
 
-export const postCartItem = (product_id) => async (dispatch) => {
+export const postCartItemThunk = (productId) => async (dispatch) => {
     const response = await fetch("/api/carts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ product_id: product_id }),
+        body: JSON.stringify({ product_id: productId }),
     });
 
     if (response.ok) {
@@ -37,7 +38,7 @@ export const postCartItem = (product_id) => async (dispatch) => {
     }
 };
 
-export const editCartItem = (cartItem, quantity) => async dispatch => {
+export const editCartItemThunk = (cartItem, quantity) => async dispatch => {
     const response = await fetch(`/api/carts/${cartItem.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -51,7 +52,7 @@ export const editCartItem = (cartItem, quantity) => async dispatch => {
     };
 };
 
-export const removeCartItem = (cartItemId) => async (dispatch) => {
+export const removeCartItemThunk = (cartItemId) => async (dispatch) => {
     const response = await fetch(`/api/carts/${cartItemId}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },

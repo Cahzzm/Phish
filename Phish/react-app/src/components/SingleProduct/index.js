@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getOneProductThunk } from '../../store/product'
+import { getSingleProductThunk } from '../../store/single_product'
 // import { NavLink } from 'react-router-dom'
 import { useParams } from 'react-router-dom/cjs/react-router-dom'
 import './SingleProduct.css'
@@ -15,7 +15,7 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
-        dispatch(getOneProductThunk(productId))
+        dispatch(getSingleProductThunk(productId))
     }, [productId, dispatch])
 
 

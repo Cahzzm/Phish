@@ -1,6 +1,6 @@
 const LOAD_CART = 'carts/LOAD';
 const PURCHASE_CART = 'carts/PURCHASE';
-const LOAD_HISTORY = 'carts/HISTORY';
+
 
 export const loadCart = (cart) => {
   return {
@@ -9,21 +9,15 @@ export const loadCart = (cart) => {
   }
 }
 
-export const loadCartHistory = (carts) => {
-  return {
-    type: LOAD_HISTORY,
-    carts
-  }
-}
-
-export const purchaseCartAction = (cart) => {
+export const purchaseCart = (cart) => {
   return {
     type: PURCHASE_CART,
     cart
   }
 }
 
-export const getCart = () => async dispatch => {
+
+export const getCartThunk = () => async dispatch => {
   const response = await fetch(`/api/carts`);
 
   if (response.ok) {
@@ -34,7 +28,7 @@ export const getCart = () => async dispatch => {
 }
 
 
-export const purchaseCart = (total) => async dispatch => {
+export const purchaseCartThunk = (total) => async dispatch => {
   const response = await fetch('/api/carts', {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -43,7 +37,7 @@ export const purchaseCart = (total) => async dispatch => {
 
   if (response.ok) {
     const cart = await response.json();
-    dispatch(purchaseCartAction(cart));
+    dispatch(purchaseCart(cart));
     return cart;
   }
 }

@@ -42,7 +42,7 @@ class ProductUpdateForm(FlaskForm):
         "name",
         validators=[
             DataRequired(),
-            Length(min=3, message="A name of at least 4 characters would be better!"),
+            Length(min=3, message="A name of at least 3 characters would be better!"),
         ],
     )
     description = StringField(

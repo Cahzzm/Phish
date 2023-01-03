@@ -43,7 +43,8 @@ def post_product():
         db.session.commit()
 
         new_preview_img = ProductImage(
-            product_id=new_product.to_dict()["id"], url=data["preview_img_url"]
+            product_id=new_product.to_dict()["id"],
+            url=data["preview_img_url"]
         )
 
         db.session.add(new_preview_img)

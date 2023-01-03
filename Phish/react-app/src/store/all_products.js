@@ -1,14 +1,7 @@
 const LOAD_PRODUCTS = 'products/LOAD';
-const CREATE_PRODUCT = 'products/NEW';
+const CREATE_PRODUCT = 'products/CREATE';
 const DELETE_PRODUCT = 'products/DELETE';
-const SEARCH_PRODUCTS = 'products/SEARCH';
 
-export const searchProducts = results => {
-  return {
-    type: SEARCH_PRODUCTS,
-    results
-  };
-};
 
 export const loadProducts = products => {
   return {
@@ -31,20 +24,8 @@ export const removeProduct = productId => {
   };
 };
 
-/* ------------------------- THUNKS -------------------------- */
 
-export const searchQuery = query => async dispatch => {
-  let formattedQuery = query.split('+').join(' ');
-  const response = await fetch(`/api/search/${formattedQuery}`);
-
-  if (response.ok) {
-    const data = await response.json();
-    dispatch(searchProducts(data));
-    return data;
-  }
-};
-
-export const getProducts = () => async dispatch => {
+export const getProductsThunk = () => async dispatch => {
   const response = await fetch('/api/products');
 
   if (response.ok) {
@@ -54,17 +35,15 @@ export const getProducts = () => async dispatch => {
   }
 };
 
-export const postProduct = payload => async dispatch => {
-  const { title, description, detailed_description, category_id, price, preview_img_url } = payload;
+export const createProductThunk = payload => async dispatch => {
+  const { name, description, price, preview_img_url } = payload;
 
   const response = await fetch('/api/products', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      title,
+      name,
       description,
-      detailed_description,
-      category_id,
       price,
       preview_img_url
     })
@@ -80,7 +59,7 @@ export const postProduct = payload => async dispatch => {
   return data;
 };
 
-export const deleteProduct = productId => async dispatch => {
+export const deleteProductThunk = productId => async dispatch => {
   const response = await fetch(`/api/products/${productId}`, {
     method: 'DELETE',
     headers: {
@@ -95,26 +74,27 @@ export const deleteProduct = productId => async dispatch => {
   }
 };
 
-/* ------------------------- GETTERS ------------------------- */
 
-export const getAllProducts = state => Object.values(state.products);
+// export const getAllProducts = state => Object.values(state.products);
 
-/* ------------------------- REDUCER ------------------------- */
 
-const initialState = {};
+const initialState = {
+  allProducts: {}
+};
 
 const allProductsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SEARCH_PRODUCTS:
-      return action.results.query.reduce((results, result) => {
-        results[result.id] = result;
-        return results;
-      }, {});
-    case LOAD_PRODUCTS:
-      return action.products.Products.reduce((products, product) => {
-        products[product.id] = product;
-        return products;
-      }, {});
+    case LOAD_PRODUCTS: {
+      console.log(action.products)
+      const allProductsState = {}
+      action.products.forEach((product) => (
+        allProductsState[product.id] = product
+      ))
+      return {
+        ...state,
+        allProducts: allProductsState
+      }
+    }
     case CREATE_PRODUCT:
       return { ...state, [action.product.id]: action.product };
     default:

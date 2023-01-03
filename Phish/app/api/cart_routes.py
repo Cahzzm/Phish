@@ -19,9 +19,9 @@ def get_cart():
 
     else:
         cart = Cart(
-            user_id = current_user.get_id(),
-            total = 0,
-            purchased = False
+            user_id=current_user.get_id(),
+            total=0,
+            purchased=False
         )
         db.session.add(cart)
         db.session.commit()
@@ -40,9 +40,9 @@ def add_cart_item():
         cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
 
         new_cart_item = CartItem(
-            cart_id = cart.to_dict()["id"],
-            product_id = request.json['product_id'],
-            quantity = 1
+            cart_id=cart.to_dict()["id"],
+            product_id=request.json['product_id'],
+            quantity=1
         )
 
         db.session.add(new_cart_item)
@@ -52,17 +52,17 @@ def add_cart_item():
 
     else:
         cart = Cart(
-            user_id = current_user.get_id(),
-            total = 0,
-            purchased = False
+            user_id=current_user.get_id(),
+            total=0,
+            purchased=False
         )
         db.session.add(cart)
         db.session.commit()
 
         new_cart_item = CartItem(
-            cart_id = cart.to_dict()["id"],
-            product_id = request.json['product_id'],
-            quantity = 1
+            cart_id=cart.to_dict()["id"],
+            product_id=request.json['product_id'],
+            quantity=1
         )
 
         db.session.add(new_cart_item)
