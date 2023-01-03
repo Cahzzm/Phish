@@ -10,7 +10,7 @@ class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     total = db.Column(db.Integer, nullable=False)
-    purchased = db.Column(db.Boolean, default=False)
+    # purchased = db.Column(db.Boolean, default=False)
 
     cart_items = db.relationship("CartItem", back_populates="item_cart")
     cart_user = db.relationship("User", back_populates="user_cart")
