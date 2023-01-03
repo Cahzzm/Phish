@@ -12,8 +12,6 @@ class Product(db.Model):
     description = db.Column(db.String(2000))
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    preview_img_id = db.Column(db.Integer, nullable=False)
-    cart_img_url = db.Column(db.String(1000))
 
     product_owner = db.relationship("User", back_populates="user_products")
     cart_item = db.relationship("CartItem", back_populates="product", cascade="all, delete")
@@ -25,10 +23,8 @@ class Product(db.Model):
             "name": self.name,
             "description": self.description,
             "price": self.price,
-            "previewImgId": self.preview_img_id,
             "productOwner": self.product_owner.to_dict(),
             "productImages": {image.to_dict()["id"]: image.to_dict() for image in self.product_images},
-            "cartImgUrl": self.cart_img_url
         }
 
 

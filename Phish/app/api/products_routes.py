@@ -9,7 +9,7 @@ products_routes = Blueprint("products", __name__)
 
 
 # GET ALL PRODUCTS
-@products_routes.route("")
+@products_routes.route("/")
 def get_products():
     products = Product.query.all()
     return {"Products": [product.to_dict() for product in products]}

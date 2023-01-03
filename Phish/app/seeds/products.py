@@ -6,7 +6,7 @@ def seed_products():
         owner_id=1,
         name='Slap On Bracelet',
         description='You slap it on your wrist and boom you have a not so fashionable bracelet',
-        price=201.79
+        price=201.79,
     )
 
     product2 = Product(
