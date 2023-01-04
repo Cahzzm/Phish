@@ -1,4 +1,4 @@
-const LOAD_SINGLE_PRODUCT = 'products/LOAD';
+const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT';
 const UPDATE_SINGLE_PRODUCT = 'products/UPDATE';
 
 export const loadSingleProduct = product => {
@@ -21,6 +21,7 @@ export const getSingleProductThunk = productId => async dispatch => {
 
   if (response.ok) {
     const product = await response.json();
+    console.log(product)
     dispatch(loadSingleProduct(product));
     return product;
   }
@@ -91,14 +92,17 @@ export const putProductImageThunk = (productImageId, url) => async dispatch => {
 export const getProductById = id => state => state.products[id];
 
 
-const initialState = {};
+const initialState = {
+  singleProduct: {}
+};
 
 const singleProductReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_SINGLE_PRODUCT:
+      console.log('this is action.product', action)
       return {
         ...state,
-        [action.product.id]: { ...action.product }
+        singleProduct: action.product
       };
     case UPDATE_SINGLE_PRODUCT:
       return {

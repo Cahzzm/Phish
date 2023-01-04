@@ -10,11 +10,12 @@ const Products = () => {
     const dispatch = useDispatch();
     const products = useSelector(state => state.products.allProducts)
 
+    // console.log('this is products in all products', Object.values(products)[0].productImages[1].url)
+
   useEffect(() => {
     dispatch(getProductsThunk())
   }, [dispatch]);
 
-  console.log(products)
 
 
     return (
@@ -23,7 +24,11 @@ const Products = () => {
                 {Object.values(products).map(product => (
                     <div key={product.id} className='single-product-card'>
                         <NavLink to={`products/${product.id}`}>
+                        <img alt='' src={Object.values(product.productImages)[0].url}>
+                        </img>
+                        <p>
                             {product.name}
+                        </p>
                         <p>
                             {product.description}
                         </p>

@@ -9,8 +9,9 @@ import './SingleProduct.css'
 const ProductDetails = () => {
     const { productId } = useParams()
     const dispatch = useDispatch()
-    const product = useSelector(state => state.products.singleProduct)
-
+    const product = useSelector(state => state?.product?.singleProduct)
+    const productImages = product.productImages
+    const singleProductImage = Object?.values(productImages || {})[0]?.url
     console.log('this is product', product)
 
 
@@ -18,13 +19,16 @@ const ProductDetails = () => {
         dispatch(getSingleProductThunk(productId))
     }, [productId, dispatch])
 
+    console.log('productImgae', singleProductImage)
+
+    if(!product) return 'Loading'
 
     return (
         <main className='main-product-details'>
             <div className='product-detail-container'>
                 <div className='product-detail-left-container'>
                     <div className='product-detail-image'>
-                        <img id='display-img' src='img.com' alt='product'></img>
+                        <img id='display-img' src={singleProductImage} alt=''></img>
                     </div>
                     <div className='customer-reviews-container'>
                         Reviews
@@ -37,13 +41,13 @@ const ProductDetails = () => {
                 </div>
                 <div className='product-detail-right-container'>
                     <p>
-                        {product.name}
+                        {product?.name}
                     </p>
                     <p>
-                        {product.description}
+                        {product?.description}
                     </p>
                     <p>
-                        {product.price}
+                        {product?.price}
                     </p>
                 </div>
                 {/* {product.productImage} */}

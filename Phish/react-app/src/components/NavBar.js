@@ -25,9 +25,14 @@ const NavBar = () => {
             Sign Up
           </NavLink>
           {sessionUser &&
-            <NavLink to='/products/new' exact={true}>
-              Sell With Phish
-            </NavLink>
+          <>
+              <NavLink to='/products/new' exact={true}>
+                Sell With Phish
+              </NavLink>
+              <NavLink to='/cart' exact={true}>
+                  <img id='phish-shopping-cart' alt='' src='https://res.cloudinary.com/drybvuzux/image/upload/v1672795199/phish-shopping-cart_bqp9cr.svg'></img>
+              </NavLink>
+          </>
           }
         {/*
           <NavLink to='/users' exact={true} activeClassName='active'>

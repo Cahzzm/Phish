@@ -23,34 +23,38 @@ def get_one_product(id):
 
 
 # CREATE A NEW PRODUCT
-@products_routes.route("", methods=["POST"])
+@products_routes.route("/new", methods=["POST"])
 @login_required
 def post_product():
     form = ProductForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         data = form.data
+        print('\\\\\\\\\\\\\\fordata////////////',data)
 
         new_product = Product(
             name=data["name"],
             description=data["description"],
             owner_id=current_user.get_id(),
             price=data["price"],
-            preview_img_id=0,
+            # preview_img_id=0,
         )
 
         db.session.add(new_product)
         db.session.commit()
+        print('=======new product==========',new_product.product_images)
 
         new_preview_img = ProductImage(
-            product_id=new_product.to_dict()["id"],
+            product_id=new_product.id,
             url=data["preview_img_url"]
         )
 
         db.session.add(new_preview_img)
         db.session.commit()
+        print('=======new image==========',new_preview_img.to_dict())
 
-        setattr(new_product, "preview_img_id", new_preview_img.to_dict()["id"])
+
+        # setattr(new_product, "preview_img_id", new_preview_img.to_dict()["id"])
 
         db.session.commit()
 

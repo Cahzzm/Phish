@@ -1,4 +1,4 @@
-const LOAD_PRODUCTS = 'products/LOAD';
+const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS';
 const CREATE_PRODUCT = 'products/CREATE';
 const DELETE_PRODUCT = 'products/DELETE';
 
@@ -37,8 +37,8 @@ export const getProductsThunk = () => async dispatch => {
 
 export const createProductThunk = payload => async dispatch => {
   const { name, description, price, preview_img_url } = payload;
-
-  const response = await fetch('/api/products', {
+  console.log('inside the create thunk',payload)
+  const response = await fetch('/api/products/new', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -51,6 +51,7 @@ export const createProductThunk = payload => async dispatch => {
 
   if (response.ok) {
     const data = await response.json();
+    console.log('this is data after creation', data)
     dispatch(createProduct(data));
     return data;
   }
@@ -75,7 +76,6 @@ export const deleteProductThunk = productId => async dispatch => {
 };
 
 
-// export const getAllProducts = state => Object.values(state.products);
 
 
 const initialState = {
@@ -85,9 +85,9 @@ const initialState = {
 const allProductsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_PRODUCTS: {
-      console.log(action.products)
+      console.log('this is all products reducer',action)
       const allProductsState = {}
-      action.products.forEach((product) => (
+      action.products.Products.forEach((product) => (
         allProductsState[product.id] = product
       ))
       return {
