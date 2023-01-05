@@ -18,7 +18,7 @@ const ProductDetails = () => {
     const product = useSelector(state => state?.product?.singleProduct)
     const productImages = product.productImages
     const singleProductImage = Object?.values(productImages || {})[0]?.url
-    const productOwner = product.productOwner
+    const productOwner = product?.productOwner
 
     console.log(cart)
 
@@ -43,7 +43,7 @@ const ProductDetails = () => {
                         <img id='display-img' src={singleProductImage} alt=''></img>
                     </div>
                     <div className='edit-delete-btns'>
-                        {user.id  === productOwner?.id &&
+                        {user?.id  === productOwner?.id &&
                             <>
                                 <Link to={`/products/${productId}/edit`}>Edit</Link>
                                 <button id='delete-product' onClick={handleDelete}>Delete</button>
