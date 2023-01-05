@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom/cjs/react-router-dom"
 import { getCartThunk } from "../../store/cart"
+import { removeCartItemThunk } from "../../store/cart_item"
 import './Cart.css'
 
 
@@ -79,7 +80,16 @@ const Cart = () => {
                         {Object.values(cartItems).map(cartItem => (
                             <div>
                                 <img alt="" src={cartItem.product.productImages.url}></img>
-                                {cartItem.product.name}
+                                <span>
+                                    {cartItem.product.name}
+                                </span>
+                                <button onClick={async (e) => {
+                                    e.preventDefault()
+                                    await dispatch(removeCartItemThunk(cartItem.id))
+                                    dispatch(getCartThunk())
+                                }}>
+                                    remove
+                                </button>
                             </div>
                         ))}
                         <NavLink to='/'>
