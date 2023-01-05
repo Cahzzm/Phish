@@ -30,7 +30,7 @@ def post_product():
     form["csrf_token"].data = request.cookies["csrf_token"]
     if form.validate_on_submit():
         data = form.data
-        print('\\\\\\\\\\\\\\fordata////////////',data)
+        # print('\\\\\\\\\\\\\\fordata////////////',data)
 
         new_product = Product(
             name=data["name"],
@@ -42,7 +42,7 @@ def post_product():
 
         db.session.add(new_product)
         db.session.commit()
-        print('=======new product==========',new_product.product_images)
+        # print('=======new product==========',new_product.product_images)
 
         new_preview_img = ProductImage(
             product_id=new_product.id,
@@ -51,7 +51,7 @@ def post_product():
 
         db.session.add(new_preview_img)
         db.session.commit()
-        print('=======new image==========',new_preview_img.to_dict())
+        # print('=======new image==========',new_preview_img.to_dict())
 
 
         # setattr(new_product, "preview_img_id", new_preview_img.to_dict()["id"])
@@ -64,7 +64,7 @@ def post_product():
 
 
 # UPDATE A SINGLE PRODUCT
-@products_routes.route("/<int:id>/update", methods=["PUT"])
+@products_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def update_product(id):
     product = Product.query.get(id)
@@ -73,8 +73,6 @@ def update_product(id):
     form = ProductUpdateForm(
         name=product_dict["name"],
         description=product_dict["description"],
-        detailed_description=product_dict["detailedDescription"],
-        category_id=product_dict["categoryId"],
         price=product_dict["price"],
     )
 

@@ -25,7 +25,7 @@ export const deleteCartItem = (cartItemId) => {
 };
 
 export const postCartItemThunk = (productId) => async (dispatch) => {
-    const response = await fetch("/api/carts", {
+    const response = await fetch("/api/carts/new", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product_id: productId }),

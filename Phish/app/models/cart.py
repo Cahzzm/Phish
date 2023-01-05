@@ -20,7 +20,7 @@ class Cart(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "total": self.total,
-            "purchased": self.purchased,
+            # "purchased": self.purchased,
             "cartItems": {item.to_dict()["id"]: item.to_dict() for item in self.cart_items},
             "cartUser": self.cart_user.to_dict()
         }

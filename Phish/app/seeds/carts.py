@@ -5,7 +5,6 @@ def seed_carts():
     cart1 = Cart(
         user_id=1,
         total=201.79
-        # purchased=True
     )
 
     db.session.add(cart1)

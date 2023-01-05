@@ -1,0 +1,149 @@
+.shopping-cart-main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
+.cart-items-container {
+    display: flex;
+    width: 70%;
+    /* border: 1px solid #D4E3EB; */
+    height: 550px;
+}
+
+.items-container {
+    width: 60%;
+    border: 2px #D4E3EB solid;
+    height: 100%;
+    margin-right: 10px;
+}
+
+.order-summary-container {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #D4E3EB;
+    height: 100%;
+    width: 40%;
+    margin-left: 10px;
+}
+
+.order-summary-title {
+    padding-top: 20px;
+    border-bottom: 2px solid #D4E3EB;
+    height: 40px;
+    font-family: sans-serif;
+    font-weight: 700;
+    padding-left: 10px;
+    background-color: #F0F5F7;
+    text-align: center;
+}
+
+
+.items-in-cart-title {
+    padding-top: 20px;
+    border-bottom: 2px solid #D4E3EB;
+    height: 40px;
+    font-family: sans-serif;
+    font-weight: 700;
+    padding-left: 10px;
+    background-color: #F0F5F7;
+    text-align: center;
+}
+
+p {
+    margin: 0;
+}
+
+#shopping-cart-cart {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #D4E3EB;
+    padding: 30px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.items-in-cart {
+    height: calc(100% - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.your-cart-is-empty {
+    font-family: sans-serif;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+
+.continu-shopping-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    border: none;
+    padding: 10px;
+    background-color: #2FB7EC;
+    color: white;
+    border-radius: 10px;
+}
+
+.continu-shopping-btn:hover {
+    cursor: pointer;
+    background-color: #0098D3;
+}
+
+
+#money-back-box {
+    width: 30px;
+}
+
+
+.order-summary {
+    font-family: sans-serif;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: ; */
+    align-items: stretch;
+    width: 100%;
+    line-height: 1.5;
+    margin-top: 70px;
+}
+
+
+.item-total {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.shipping {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.order-total {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 30px;
+}
+
+.money-back-guarantee {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.money-back-gurantee-body {
+    display: flex;
+    justify-content: center;
+}

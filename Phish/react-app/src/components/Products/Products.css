@@ -3,9 +3,12 @@
     display: flex;
     justify-content: center;
     font-family: sans-serif;
+    background-color: #F8FAFB;
+    height: 100vh;
 }
 
 .all-products-container {
+    /* background-color: #F8FAFB; */
     display: flex;
     justify-content: center;
     width: 50%;
@@ -14,6 +17,14 @@
 
 .single-product-card {
     width: 210px;
+    height: 268px;
     padding-top: 20px;
     margin: 10px;
+    background-color: white;
+}
+
+
+#product-image-home {
+    width: 210px;
+    height: 210px;
 }

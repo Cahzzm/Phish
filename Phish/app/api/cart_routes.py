@@ -6,14 +6,19 @@ from app.models import db, Cart, CartItem
 carts_routes = Blueprint("carts", __name__)
 
 
-@carts_routes.route("")
+@carts_routes.route("/")
 @login_required
 def get_cart():
 
-    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).count()
+    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).count()
 
     if existing_cart:
-        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
+        print('''
+
+
+
+        ''')
+        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
 
         return cart.to_dict()
 
@@ -21,7 +26,7 @@ def get_cart():
         cart = Cart(
             user_id=current_user.get_id(),
             total=0,
-            purchased=False
+            # purchased=False
         )
         db.session.add(cart)
         db.session.commit()
@@ -30,14 +35,19 @@ def get_cart():
 
 
 
-@carts_routes.route("", methods=["POST"])
+@carts_routes.route("/new", methods=["POST"])
 @login_required
 def add_cart_item():
 
-    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).count()
+    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).count()
 
     if existing_cart:
-        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
+        print('''
+
+
+
+        ''', existing_cart)
+        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
 
         new_cart_item = CartItem(
             cart_id=cart.to_dict()["id"],
@@ -54,7 +64,7 @@ def add_cart_item():
         cart = Cart(
             user_id=current_user.get_id(),
             total=0,
-            purchased=False
+            # purchased=False
         )
         db.session.add(cart)
         db.session.commit()

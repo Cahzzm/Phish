@@ -27,9 +27,9 @@ export const getSingleProductThunk = productId => async dispatch => {
   }
 };
 
-export const putSingleProductThunk = product => async dispatch => {
+export const putSingleProductThunk = (product, productId) => async dispatch => {
   const { name, description, price } = product;
-  const response = await fetch(`/api/products/${product.id}/update`, {
+  const response = await fetch(`/api/products/${productId}/edit`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, description, price })
@@ -74,7 +74,7 @@ export const deleteProductImageThunk = productImageId => async dispatch => {
 };
 
 export const putProductImageThunk = (productImageId, url) => async dispatch => {
-  const response = await fetch(`/api/images/${productImageId}/update`, {
+  const response = await fetch(`/api/images/${productImageId}/edit`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ productImageId, url })

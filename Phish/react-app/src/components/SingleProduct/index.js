@@ -2,26 +2,38 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProductThunk } from '../../store/single_product'
 // import { NavLink } from 'react-router-dom'
-import { useParams } from 'react-router-dom/cjs/react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom/cjs/react-router-dom'
 import './SingleProduct.css'
+import { deleteProductThunk } from '../../store/all_products'
+import { editCartItemThunk, postCartItemThunk } from '../../store/cart_item'
+import { getCartThunk } from '../../store/cart'
 
 
 const ProductDetails = () => {
     const { productId } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
+    const user = useSelector(state => state.session.user)
+    const cart = useSelector(state => state.cart)
     const product = useSelector(state => state?.product?.singleProduct)
     const productImages = product.productImages
     const singleProductImage = Object?.values(productImages || {})[0]?.url
-    console.log('this is product', product)
+    const productOwner = product.productOwner
 
+    console.log(cart)
 
     useEffect(() => {
         dispatch(getSingleProductThunk(productId))
     }, [productId, dispatch])
 
-    console.log('productImgae', singleProductImage)
 
-    if(!product) return 'Loading'
+    const handleDelete = async (e) => {
+        e.preventDefault()
+
+        await dispatch(deleteProductThunk(productId))
+
+        history.push('/')
+    }
 
     return (
         <main className='main-product-details'>
@@ -30,25 +42,42 @@ const ProductDetails = () => {
                     <div className='product-detail-image'>
                         <img id='display-img' src={singleProductImage} alt=''></img>
                     </div>
-                    <div className='customer-reviews-container'>
-                        Reviews
+                    <div className='edit-delete-btns'>
+                        {user.id  === productOwner?.id &&
+                            <>
+                                <Link to={`/products/${productId}/edit`}>Edit</Link>
+                                <button id='delete-product' onClick={handleDelete}>Delete</button>
+                            </>
+                        }
                     </div>
+                    {/* <div className='customer-reviews-container'>
+                        Reviews
+                    </div> */}
                     <div className='product-description-container'>
                         Description
                         <br></br>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                        {product.description}
                     </div>
                 </div>
                 <div className='product-detail-right-container'>
                     <p>
                         {product?.name}
                     </p>
-                    <p>
+                    {/* <p>
                         {product?.description}
-                    </p>
+                    </p> */}
                     <p>
-                        {product?.price}
+                        ${product?.price}
                     </p>
+                    <button className='add-to-cart-btn'
+                    onClick={async (e) => {
+                        e.preventDefault()
+                        await dispatch(postCartItemThunk(productId))
+                        history.push('/cart')
+                    }}
+                    >
+                    Add to cart
+                    </button>
                 </div>
                 {/* {product.productImage} */}
             </div>

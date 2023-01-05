@@ -11,6 +11,8 @@ import { authenticate } from './store/session';
 import Products from './components/Products';
 import ProductDetails from './components/SingleProduct';
 import CreateProduct from './components/CreateProduct';
+import EditProduct from './components/EditProduct';
+import Cart from './components/Cart';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -46,11 +48,17 @@ function App() {
         <Route path='/' exact={true}>
           <Products />
         </Route>
-        <Route path='/products/new'>
+        <Route path='/products/new' exact={true}>
           <CreateProduct />
         </Route>
-        <Route path='/products/:productId'>
+        <Route path='/products/:productId' exact={true}>
           <ProductDetails />
+        </Route>
+        <Route path='/products/:productId/edit' exact={true}>
+          <EditProduct />
+        </Route>
+        <Route path='/cart' exact={true}>
+          <Cart />
         </Route>
       </Switch>
     </BrowserRouter>

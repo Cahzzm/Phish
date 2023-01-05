@@ -24,16 +24,16 @@ const Products = () => {
                 {Object.values(products).map(product => (
                     <div key={product.id} className='single-product-card'>
                         <NavLink to={`products/${product.id}`}>
-                        <img alt='' src={Object.values(product.productImages)[0].url}>
+                        <img id='product-image-home' alt='' src={Object.values(product.productImages)[0].url}>
                         </img>
                         <p>
                             {product.name}
                         </p>
-                        <p>
+                        {/* <p>
                             {product.description}
-                        </p>
+                        </p> */}
                         <p>
-                            {product.price}
+                            ${product.price}
                         </p>
                         </NavLink>
                     </div>
