@@ -87,7 +87,35 @@ textarea::-webkit-scrollbar-thumb {
 .product-form-btn-container {
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
+    height: 50px;
 }
 
 
+.create-product-btn {
+    height: 100%;
+    font-size: 24px;
+    background-color: #2FB7EC;
+    /* padding: 10px; */
+    width: 50%;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
 
+.create-product-btn:hover {
+    background-color: #0098D3;
+    cursor: pointer;
+}
+
+
+.product-form-cancel {
+    color: red;
+}
+
+.errors-create-form {
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
+    color: red;
+}

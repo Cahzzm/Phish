@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom/cjs/react-router-dom'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
@@ -29,11 +29,21 @@ const CreateProduct = () => {
             })
         )
 
-        console.log('this is the new product',newProduct)
+        // console.log('this is the new product',newProduct)
         if (newProduct) {
             newProduct.errors ? setErrors(newProduct.errors) : history.push(`/products/${newProduct.id}`)
         }
     }
+
+
+    // useEffect(() => {
+    //     const errs = []
+    //     if(name.length < 3 || name.length >= 25) errs.push("Name must be between 3 and 25 characters")
+    //     if(description.length < 10 || name.length < 200) errs.push("Description must be between 10 and 200 characters")
+    //     if(price <= 0 || price > 9999) errs.push('Make the people spend some money but not too much!')
+    //     if(imgUrl.length === 0) errs.push('Please provide an image url for your product')
+    //     setErrors(errs)
+    // }, [name, description, price, imgUrl])
 
 
     return (
@@ -42,6 +52,13 @@ const CreateProduct = () => {
                 <div className='product-form-details-container'>
                     <div className='product-form-header'>
                         Listing Details
+                    </div>
+                    <div className='errors-create-form'>
+                        {errors.map(error => (
+                            <span key={error}>
+                                {error}
+                            </span>
+                        ))}
                     </div>
                     <div className='product-form-name-container'>
                         <label>

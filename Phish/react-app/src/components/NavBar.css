@@ -17,6 +17,7 @@ a {
     width: 100vw;
     border-bottom: 2px solid rgb(220, 229, 233);
     align-items: center;
+    z-index: 100;
 }
 
 .phish-home-button {

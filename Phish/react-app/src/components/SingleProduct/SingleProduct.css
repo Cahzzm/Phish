@@ -17,6 +17,9 @@
 }
 
 .product-detail-right-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 400px;
     height: 500px;
     border: 2px solid rgb(240, 245, 247);
@@ -45,4 +48,18 @@
 
 #display-img {
     width: 500px;
+}
+
+.add-to-cart-btn {
+    border: none;
+    font-size: 24px;
+    width: 100%;
+    color: white;
+    height: 40px;
+    background-color: #FF5622;
+}
+
+.add-to-cart-btn:hover {
+    cursor: pointer;
+    background-color: #CC441B;
 }

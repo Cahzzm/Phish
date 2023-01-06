@@ -13,11 +13,6 @@ def get_cart():
     existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).count()
 
     if existing_cart:
-        print('''
-
-
-
-        ''')
         cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
 
         return cart.to_dict()

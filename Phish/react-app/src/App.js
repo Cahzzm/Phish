@@ -13,6 +13,7 @@ import ProductDetails from './components/SingleProduct';
 import CreateProduct from './components/CreateProduct';
 import EditProduct from './components/EditProduct';
 import Cart from './components/Cart';
+import Footer from './components/Footer/Footer';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,11 +34,18 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+        <Route path='/signin' exact={true}>
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems:'center'}}>
+              <h1 style={{fontFamily: 'sans-serif', fontWeight:900}}>phish</h1>
+              <span style={{fontFamily: 'sans-serif'}}>A totally legit site to buy your favorite items!</span>
+            </div>
+
+            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginTop: '50px'}}>
+              <LoginForm />
+              <SignUpForm />
+            </div>
+          </div>
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
@@ -61,6 +69,7 @@ function App() {
           <Cart />
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }

@@ -7,21 +7,22 @@ class ProductForm(FlaskForm):
     name = StringField(
         "name",
         validators=[
-            DataRequired(),
-            Length(min=3, message="Please provide a name of at least 3 characters"),
+            DataRequired(message="Please provide a name between 3 - 25 characters"),
+            Length(min=3, max=25, message="Please provide a name between 3 - 25 characters"),
         ],
     )
     description = StringField(
         "Description",
         validators=[
-            DataRequired("Please Provide a description of at least 10 characters"),
+            DataRequired(message="Please Provide a description from 10 - 200 characters"),
             Length(
                 min=10,
-                message="Please Provide a description of at least 10 characters",
+                max=200,
+                message="Please Provide a description from 10 - 200 characters",
             ),
         ],
     )
-    price = IntegerField("Price", validators=[DataRequired(), NumberRange(0)])
+    price = IntegerField("Price", validators=[DataRequired(), NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')])
     preview_img_url = StringField(
         "Preview Image URL",
         validators=[
@@ -41,19 +42,20 @@ class ProductUpdateForm(FlaskForm):
     name = StringField(
         "name",
         validators=[
-            DataRequired(),
-            Length(min=3, message="A name of at least 3 characters would be better!"),
+            DataRequired(message='Please provide a name between 3 - 25 characters'),
+            Length(min=3, max=25, message="Please provide a name between 3 - 25 characters"),
         ],
     )
     description = StringField(
         "Description",
         validators=[
-            DataRequired("Please Provide a description of at least 10 characters"),
+            DataRequired("Please Provide a description from 10 - 200 characters"),
             Length(
                 min=10,
-                message="Please provide a description of at least 10 characters",
+                max=200,
+                message="Please Provide a description from 10 - 200 characters",
             ),
         ],
     )
-    price = IntegerField("Price", validators=[DataRequired(), NumberRange(0)])
+    price = IntegerField("Price", validators=[DataRequired(message='Please keep the price between 1 - 9999'), NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')])
     submit = SubmitField("Submit")

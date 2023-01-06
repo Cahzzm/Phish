@@ -70,7 +70,8 @@ p {
     height: calc(100% - 60px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* justify-content: space-between; */
+    margin: 5px;
     align-items: center;
 }
 
@@ -92,7 +93,7 @@ p {
     padding: 10px;
     background-color: #2FB7EC;
     color: white;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 .continu-shopping-btn:hover {
@@ -141,9 +142,69 @@ p {
     display: flex;
     justify-content: space-around;
     align-items: center;
+    font-weight: 600;
 }
 
 .money-back-gurantee-body {
     display: flex;
     justify-content: center;
+    /* width: 50%; */
+    margin-top: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+.remove-cartItem-btn {
+    border: none;
+    font-size: 16px;
+    font-family: sans-serif;
+    background-color: #2FB7EC;
+    color: white;
+    border-radius: 4px;
+    padding: 4px;
+    height: 30px;
+    margin-right: 15px;
+}
+
+
+.remove-cartItem-btn:hover {
+    cursor: pointer;
+    background-color: #0098D3;
+}
+
+
+.cart-item-card {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+    width: 100%;
+}
+
+
+#cart-item-image {
+    width: 100px;
+}
+
+
+.cart-item-details {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px;
+    margin-left: 25px;
+}
+
+.product-cart-details {
+    margin-left: 25px;
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+}
+
+
+#quantity-select {
+    width: 40px;
+    height: 24px;
 }

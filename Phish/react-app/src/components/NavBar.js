@@ -18,12 +18,11 @@ const NavBar = () => {
       </div>
 
       <div className='right-side-navbar'>
-          <NavLink to='/login' exact={true}>
-            Login
+        {!sessionUser &&
+          <NavLink to='/signin' exact={true} style={{color:'rgb(0, 144, 217)', marginRight:'10px'}}>
+            Sign In
           </NavLink>
-          <NavLink to='/sign-up' exact={true}>
-            Sign Up
-          </NavLink>
+        }
           {sessionUser &&
           <>
               <NavLink to='/products/new' exact={true}>
@@ -39,7 +38,9 @@ const NavBar = () => {
             Users
           </NavLink>
          */}
+         {sessionUser &&
           <LogoutButton />
+         }
       </div>
     </div>
   );

@@ -29,6 +29,7 @@ const EditProduct = () => {
                 name,
                 description,
                 price,
+
             }
 
         let editedProduct = await dispatch(putSingleProductThunk(newProduct, productDetails?.id))
@@ -48,6 +49,13 @@ const EditProduct = () => {
                         Listing Details
                     </div>
                     <div className='product-form-name-container'>
+                    <div className='errors-create-form'>
+                        {errors.map(error => (
+                            <span key={error}>
+                                {error}
+                            </span>
+                        ))}
+                    </div>
                         <label>
                             Name
                         </label>

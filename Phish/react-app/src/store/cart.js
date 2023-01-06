@@ -20,7 +20,7 @@ export const purchaseCart = (cart) => {
 export const getCartThunk = () => async dispatch => {
   const response = await fetch(`/api/carts/`);
   if (response.ok) {
-    console.log('====================')
+    // console.log('====================')
     const cart = await response.json();
     dispatch(loadCart(cart));
     return cart;
