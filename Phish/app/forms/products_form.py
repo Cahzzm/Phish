@@ -22,11 +22,11 @@ class ProductForm(FlaskForm):
             ),
         ],
     )
-    price = IntegerField("Price", validators=[DataRequired(), NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')])
+    price = IntegerField("Price", validators=[DataRequired(message='Please keep the price between 1 - 9999'), NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')])
     preview_img_url = StringField(
         "Preview Image URL",
         validators=[
-            DataRequired(),
+            DataRequired(message='Please enter a valid URL for your image'),
             Length(
                 min=0,
                 max=2000,
@@ -57,5 +57,8 @@ class ProductUpdateForm(FlaskForm):
             ),
         ],
     )
-    price = IntegerField("Price", validators=[DataRequired(message='Please keep the price between 1 - 9999'), NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')])
+    price = IntegerField("Price", validators=[
+        DataRequired(message='Please keep the price between 1 - 9999'),
+        NumberRange(min=1, max=9999, message='Please keep the price between 1 - 9999')
+        ])
     submit = SubmitField("Submit")

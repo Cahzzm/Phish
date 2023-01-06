@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom/cjs/react-router-dom"
 import { getCartThunk } from "../../store/cart"
 import { editCartItemThunk, removeCartItemThunk } from "../../store/cart_item"
+import { purchaseCartThunk } from "../../store/cart"
 import './Cart.css'
 
 
@@ -158,6 +159,17 @@ const Cart = () => {
                         <div className="order-total">
                             <span>Order Total</span>
                             <span>${getTotal(cartItemsArr)}</span>
+                        </div>
+                        <div className="seperator-checkout-container">
+                            <div className="order-seperator"></div>
+                            <div className="checkout-btn">
+                                <button
+                                onClick={() => {
+                                    dispatch(purchaseCartThunk())
+                                }}
+                                id="checkout-button">Checkout</button>
+                            </div>
+                            <div className="order-seperator"></div>
                         </div>
                         <div className="money-back-guarantee">
                             <span>Money Back Guarantee</span>

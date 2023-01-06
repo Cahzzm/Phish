@@ -13,6 +13,15 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+
+  // useEffect(() => {
+  //       const errs = []
+  //       if(username.length < 3 || username.length >= 25) errs.push("Username must be between 3 and 25 characters")
+  //       // if(!email.split(" ").includes('@').join("")) errs.push("Please provide a valid email")
+  //       if(password.length < 5 || password.length > 16) errs.push('Please provide a password between 5 and 16 characters')
+  //       setErrors(errs)
+  //   }, [username, email, password])
+
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
@@ -46,7 +55,7 @@ const SignUpForm = () => {
   return (
     <form className='signup-form-container' onSubmit={onSignUp}>
       <h2>Signup</h2>
-      <div>
+      <div className='errors'>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
@@ -82,6 +91,7 @@ const SignUpForm = () => {
           name='password'
           onChange={updatePassword}
           value={password}
+          // required={true}
         ></input>
       </div>
       <div className='user-input'>

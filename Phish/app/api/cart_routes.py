@@ -95,12 +95,11 @@ def delete_cart_item(id):
     return {'message': 'Successfully deleted', 'status_code': 200}
 
 
-@carts_routes.route("", methods=["PUT"])
+@carts_routes.route("/checkout", methods=["DELETE"])
 @login_required
 def purchase_cart():
-    cart = Cart.query.filter(Cart.user_id == current_user.get_id()) .filter(Cart.purchased == False).one()
+    cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
 
-    setattr(cart, "purchased", True)
-    setattr(cart, "total", request.json['total'])
+    db.session.delete(cart)
     db.session.commit()
     return cart.to_dict()

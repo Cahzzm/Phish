@@ -28,17 +28,15 @@ export const getCartThunk = () => async dispatch => {
 }
 
 
-export const purchaseCartThunk = (total) => async dispatch => {
-  const response = await fetch('/api/carts', {
-    method: 'PUT',
+export const purchaseCartThunk = (cart) => async dispatch => {
+  const response = await fetch('/api/carts/checkout', {
+    method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ "total": total })
   })
 
   if (response.ok) {
     const cart = await response.json();
     dispatch(purchaseCart(cart));
-    return cart;
   }
 }
 
@@ -53,7 +51,9 @@ const cartReducer = (state = initialState, action) => {
       console.log(action)
       return action.cart
     case PURCHASE_CART:
-      return { [action.cart.id]: action.cart };
+      const newState = {...state}
+      delete newState[action.cart]
+      return newState
     default:
       return state;
   };
