@@ -42,33 +42,44 @@ const ProductDetails = () => {
                     <div className='product-detail-image'>
                         <img id='display-img' src={singleProductImage} alt=''></img>
                     </div>
-                    <div className='edit-delete-btns'>
+                    <div className='edit-delete-btns-container'>
                         {user?.id  === productOwner?.id &&
-                            <>
+                            <div className='edit-delete-btns'>
+                                <div className='edit-product-btn'>
                                 <Link to={`/products/${productId}/edit`}>Edit</Link>
+                                </div>
+                                <div className='delete-product-btn'>
                                 <button id='delete-product' onClick={handleDelete}>Delete</button>
-                            </>
+                                </div>
+                            </div>
                         }
                     </div>
                     {/* <div className='customer-reviews-container'>
                         Reviews
                     </div> */}
                     <div className='product-description-container'>
+                        <h2>
+
                         Description
+                        </h2>
                         <br></br>
+                        <div className='product-description-body'>
                         {product.description}
+                        </div>
                     </div>
                 </div>
                 <div className='product-detail-right-container'>
-                    <p>
-                        {product?.name}
-                    </p>
-                    {/* <p>
-                        {product?.description}
-                    </p> */}
-                    <p>
-                        ${product?.price}
-                    </p>
+                    <div className='product-detail-right'>
+                        <p className='product-right-name'>
+                            {product?.name}
+                        </p>
+                        {/* <p>
+                            {product?.description}
+                        </p> */}
+                        <p className='product-price-right'>
+                            ${product?.price}
+                        </p>
+                    </div>
                     <button className='add-to-cart-btn'
                     onClick={async (e) => {
                         e.preventDefault()

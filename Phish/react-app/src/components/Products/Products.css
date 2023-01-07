@@ -38,6 +38,7 @@ html, body {
     background-color: white;
     box-shadow: 6px 6px 18px rgba(39,44,49,0.1), 1px 3px 8px rgba(39,44,49,.03);
     transition: all .3s ease; /* back to normal */
+    border-radius: 4px;
 }
 
 .single-product-card:hover {
