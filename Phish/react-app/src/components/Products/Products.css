@@ -8,15 +8,26 @@ html, body {
     justify-content: center;
     font-family: sans-serif;
     background-color: #F8FAFB;
-    height: 100vh;
+    height: 100%;
 }
 
 .all-products-container {
     /* background-color: #F8FAFB; */
     display: flex;
     justify-content: center;
-    width: 50%;
+    flex-wrap: wrap;
+    width: 70%;
     line-height: 1.15;
+}
+
+.product-name {
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+.product-price {
+    margin-left: 5px;
+    font-size: 16px;
 }
 
 .single-product-card {
@@ -25,6 +36,12 @@ html, body {
     padding-top: 20px;
     margin: 10px;
     background-color: white;
+    box-shadow: 6px 6px 18px rgba(39,44,49,0.1), 1px 3px 8px rgba(39,44,49,.03);
+    transition: all .3s ease; /* back to normal */
+}
+
+.single-product-card:hover {
+    transform: translate3D(0,-1px,0) scale(1.03);
 }
 
 

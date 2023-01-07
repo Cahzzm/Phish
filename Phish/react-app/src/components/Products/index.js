@@ -26,13 +26,13 @@ const Products = () => {
                         <NavLink to={`products/${product.id}`}>
                         <img id='product-image-home' alt='' src={Object.values(product.productImages)[0].url}>
                         </img>
-                        <p>
+                        <p className='product-name'>
                             {product.name}
                         </p>
                         {/* <p>
                             {product.description}
                         </p> */}
-                        <p>
+                        <p className='product-price'>
                             ${product.price}
                         </p>
                         </NavLink>

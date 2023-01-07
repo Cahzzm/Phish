@@ -21,7 +21,7 @@ const Cart = () => {
     // console.log('this is the image', singleProductImage)
 
     const getTotal = (cartItemsArr) => {
-        let total = 0
+        let total = 0.00
         for (let i = 0; i < cartItemsArr.length; i++) {
             let cartItem = cartItemsArr[i]
             total += cartItem.product.price
