@@ -19,13 +19,13 @@ const NavBar = () => {
 
       <div className='right-side-navbar'>
         {!sessionUser &&
-          <NavLink to='/signin' exact={true} style={{color:'rgb(0, 144, 217)', marginRight:'10px'}}>
+          <NavLink className='sell-with-phish' to='/signin' exact={true} style={{color:'rgb(0, 144, 217)', marginRight:'10px'}}>
             Sign In
           </NavLink>
         }
           {sessionUser &&
           <>
-              <NavLink to='/products/new' exact={true}>
+              <NavLink className='sell-with-phish' to='/products/new' exact={true}>
                 Sell With Phish
               </NavLink>
               <NavLink to='/cart' exact={true}>

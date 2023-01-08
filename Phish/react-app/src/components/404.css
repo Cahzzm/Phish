@@ -1,0 +1,46 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    color: #48636F;
+}
+
+
+.not-found-content {
+    margin-top: 150px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.not-found-body {
+    width: 60%;
+    text-align: center;
+    margin-bottom: 20px;
+    line-height: 1.75;
+    font-size: 20px;
+}
+
+.continue-shopping-not-found {
+    width: 40%;
+}
+
+#continue-shopping-not-found {
+    width: 100%;
+    border: none;
+    color: white;
+    background-color: #2FB7EC;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+#continue-shopping-not-found:hover {
+    cursor: pointer;
+    background-color: #0098D3;
+
+}

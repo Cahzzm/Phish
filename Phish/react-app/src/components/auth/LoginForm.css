@@ -4,14 +4,14 @@
     justify-content: center;
     align-items: center;
     /* border: 1px solid red; */
-    width: 40%;
+    width: 35%;
     font-family: sans-serif;
 }
 
 
 #demo-login-button {
     color: white;
-    width: 96%;
+    width: 100%;
     font-size: 20px;
     width: 100%;
     border: none;
@@ -48,7 +48,7 @@
 }
 
 #user-input {
-    width: 96%;
+    width: 100%;
 }
 
 .errors {

@@ -12,7 +12,7 @@ class Cart(db.Model):
     total = db.Column(db.Integer, nullable=False)
     # purchased = db.Column(db.Boolean, default=False)
 
-    cart_items = db.relationship("CartItem", back_populates="item_cart")
+    cart_items = db.relationship("CartItem", back_populates="item_cart", cascade='all, delete')
     cart_user = db.relationship("User", back_populates="user_cart")
 
     def to_dict(self):
@@ -38,7 +38,7 @@ class CartItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
 
-    item_cart = db.relationship("Cart", back_populates="cart_items")
+    item_cart = db.relationship("Cart", back_populates="cart_items", cascade='all, delete')
     product = db.relationship("Product", back_populates="cart_item")
 
     def to_dict(self):

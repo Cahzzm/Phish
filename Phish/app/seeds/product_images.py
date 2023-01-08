@@ -52,35 +52,35 @@ def seed_product_images():
         url='https://canary.contestimg.wish.com/api/webimage/605d7452cd9b97fd33cf3add-normal.jpg?cache_buster=79312e0f21f41d6064a085efff483c6f',
     )
     product_image13= ProductImage(
-        product_id=13,
+        product_id=20,
         url='https://canary.contestimg.wish.com/api/webimage/61a8caea9c5a82ad58f3a7f7-normal.jpg?cache_buster=42f3796aeff6181cdda1c56b224e4ca2',
     )
     product_image14= ProductImage(
-        product_id=14,
+        product_id=13,
         url='https://canary.contestimg.wish.com/api/webimage/61ea67776758adb248decd9e-normal.jpg?cache_buster=7278078b17afa489376b249def1d5a35',
     )
     product_image15= ProductImage(
-        product_id=15,
+        product_id=14,
         url='https://canary.contestimg.wish.com/api/webimage/5fd97d36ad2ede90ff1358e1-normal.jpg?cache_buster=fb9bd8de1431f3d229db6f92a683b680',
     )
     product_image16= ProductImage(
-        product_id=16,
+        product_id=15,
         url='https://canary.contestimg.wish.com/api/webimage/619899ad9df7da120d6f4f87-normal.jpg?cache_buster=a058008b581c8d2b4fc5a84e24edba88',
     )
     product_image17= ProductImage(
-        product_id=17,
+        product_id=16,
         url='https://canary.contestimg.wish.com/api/webimage/61810e1fdc96060c4df8959e-normal.jpg?cache_buster=eab6a6e2b491df9fe49c7d1594842184',
     )
     product_image18= ProductImage(
-        product_id=18,
+        product_id=17,
         url='https://canary.contestimg.wish.com/api/webimage/5e8ec43efc800305a688039d-normal.jpg?cache_buster=c94924cbbb2f526849f2ee3c83ae2f78',
     )
     product_image19= ProductImage(
-        product_id=19,
+        product_id=18,
         url='https://canary.contestimg.wish.com/api/webimage/5eb3aaee9dd6ca2a52b11595-normal.jpg?cache_buster=41c5d24da840658bf805e50ae049903b',
     )
     product_image20= ProductImage(
-        product_id=20,
+        product_id=19,
         url='https://canary.contestimg.wish.com/api/webimage/5a6061e66cecb95716a706b1-normal.jpg?cache_buster=48b2b7ad0b33fdf57fbfa950a105debb',
     )
     product_image21= ProductImage(

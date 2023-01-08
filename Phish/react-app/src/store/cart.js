@@ -28,8 +28,8 @@ export const getCartThunk = () => async dispatch => {
 }
 
 
-export const purchaseCartThunk = (cart) => async dispatch => {
-  const response = await fetch('/api/carts/checkout', {
+export const purchaseCartThunk = (cartId) => async dispatch => {
+  const response = await fetch(`/api/carts/checkout/${cartId}`, {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json' },
   })

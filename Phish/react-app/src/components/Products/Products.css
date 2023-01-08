@@ -18,6 +18,7 @@ html, body {
     flex-wrap: wrap;
     width: 70%;
     line-height: 1.15;
+    margin-bottom: 50px;
 }
 
 .product-name {

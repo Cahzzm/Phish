@@ -9,7 +9,7 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <NavLink to='/' onClick={onLogout}>Logout</NavLink>;
+  return <NavLink className='logout-btn' to='/' onClick={onLogout}>Logout</NavLink>;
 };
 
 export default LogoutButton;

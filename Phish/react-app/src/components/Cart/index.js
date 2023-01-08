@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { NavLink } from "react-router-dom/cjs/react-router-dom"
+import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom"
 import { getCartThunk } from "../../store/cart"
 import { editCartItemThunk, removeCartItemThunk } from "../../store/cart_item"
 import { purchaseCartThunk } from "../../store/cart"
@@ -9,14 +9,14 @@ import './Cart.css'
 
 
 const Cart = () => {
-
+    const history = useHistory()
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const cartItems = useSelector(state => state.cart.cartItems)
     // const [quantity, setQuantity] = useState(1)
     // const singleProductImage = Object?.values(cartItems?.product)
     const cartItemsArr = Object.values(cartItems || {})
-    // console.log('this is cart', cart)
+    // console.log('this is cart', cart.id)
     // console.log('this is cartItems', cartItems)
     // console.log('this is the image', singleProductImage)
 
@@ -95,7 +95,7 @@ const Cart = () => {
                             <div className='cart-item-card' key={cartItem.product.id}>
                                     <NavLink to={`/products/${cartItem.product.id}`}>
                                     <div className="cart-item-details">
-                                        <img id='cart-item-image' alt="" src={cartItem.product.productImages[cartItem.product.id].url}></img>
+                                        <img id='cart-item-image' alt={cartItem.product.name} src={cartItem.product.productImages[cartItem.product.id]?.url}></img>
                                         <div className="product-cart-details">
                                         <span style={{fontWeight: 700}}>
                                             {cartItem.product.name}
@@ -165,8 +165,11 @@ const Cart = () => {
                             <div className="checkout-btn">
                                 <button
                                 onClick={() => {
-                                    dispatch(purchaseCartThunk())
+                                    dispatch(purchaseCartThunk(cart.id))
+                                    history.push('/')
+                                    alert('Thank you for wasting - I mean spending your money with us!')
                                 }}
+                                disabled={!cartItemsArr.length}
                                 id="checkout-button">Checkout</button>
                             </div>
                             <div className="order-seperator"></div>

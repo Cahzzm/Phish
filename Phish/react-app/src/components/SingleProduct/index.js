@@ -83,8 +83,12 @@ const ProductDetails = () => {
                     <button className='add-to-cart-btn'
                     onClick={async (e) => {
                         e.preventDefault()
-                        await dispatch(postCartItemThunk(productId))
-                        history.push('/cart')
+                        if(user) {
+                            await dispatch(postCartItemThunk(productId))
+                            history.push('/cart')
+                        } else {
+                            history.push('/signin')
+                        }
                     }}
                     >
                     Add to cart

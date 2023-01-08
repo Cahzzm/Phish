@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
@@ -14,13 +14,14 @@ const SignUpForm = () => {
   const dispatch = useDispatch();
 
 
-  // useEffect(() => {
-  //       const errs = []
-  //       if(username.length < 3 || username.length >= 25) errs.push("Username must be between 3 and 25 characters")
-  //       // if(!email.split(" ").includes('@').join("")) errs.push("Please provide a valid email")
-  //       if(password.length < 5 || password.length > 16) errs.push('Please provide a password between 5 and 16 characters')
-  //       setErrors(errs)
-  //   }, [username, email, password])
+  useEffect(() => {
+        const errs = []
+        // if(username.length < 3 || username.length >= 25) errs.push("Username must be between 3 and 25 characters")
+        // // if(!email.split(" ").includes('@').join("")) errs.push("Please provide a valid email")
+        if(repeatPassword !== password) errs.push('Passwords must match')
+        // if(password.length < 5 || password.length > 16) errs.push('Please provide a password between 5 and 16 characters')
+        setErrors(errs)
+    }, [repeatPassword, password])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -76,7 +77,7 @@ const SignUpForm = () => {
         <input
           id='user-input'
           placeholder='Email'
-          type='text'
+          type='email'
           name='email'
           onChange={updateEmail}
           value={email}
@@ -103,7 +104,7 @@ const SignUpForm = () => {
           name='repeat_password'
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+          // required={true}
         ></input>
       </div>
       <button id='signup-button' type='submit'>Sign Up</button>

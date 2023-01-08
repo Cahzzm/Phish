@@ -14,6 +14,7 @@ import CreateProduct from './components/CreateProduct';
 import EditProduct from './components/EditProduct';
 import Cart from './components/Cart';
 import Footer from './components/Footer/Footer';
+import ResourceNotFound from './components/404';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -41,8 +42,10 @@ function App() {
               <span style={{fontFamily: 'sans-serif'}}>A totally legit site to buy your favorite items!</span>
             </div>
 
-            <div style={{display: 'flex', justifyContent: 'space-around', alignItems: 'center', marginTop: '50px'}}>
+            <div style={{display: 'flex', justifyContent: 'space-evenly', alignItems: 'center', marginTop: '50px', margin: '20px'}}>
+              {/* <div style={{width: '100%'}}> */}
               <LoginForm />
+              {/* </div> */}
               <SignUpForm />
             </div>
           </div>
@@ -67,6 +70,9 @@ function App() {
         </Route>
         <Route path='/cart' exact={true}>
           <Cart />
+        </Route>
+        <Route>
+          <ResourceNotFound />
         </Route>
       </Switch>
       <Footer />

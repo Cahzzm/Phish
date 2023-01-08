@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
     /* border: 1px solid red; */
-    width: 40%;
+    width: 35%;
     font-family: sans-serif;
 }
 
@@ -35,7 +35,7 @@
 }
 
 #user-input {
-    width: 96%;
+    width: 100%;
 }
 
 .errors {

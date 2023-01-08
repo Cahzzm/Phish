@@ -9,6 +9,7 @@
     background-color: white;
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-top:0.2%;
     border-top: gray 2px solid;
     background-color: rgb(216, 212, 212);
@@ -21,6 +22,7 @@
 }
 
 #developed-by {
+    vertical-align: middle;
     font-weight: 500;
     font-size: 13px;
 }

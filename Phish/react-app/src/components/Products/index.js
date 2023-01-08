@@ -24,7 +24,7 @@ const Products = () => {
                 {Object.values(products).map(product => (
                     <div key={product.id} className='single-product-card'>
                         <NavLink to={`products/${product.id}`}>
-                        <img id='product-image-home' alt='' src={Object.values(product.productImages)[0].url}>
+                        <img id='product-image-home' alt='' src={Object.values(product.productImages)[0]?.url}>
                         </img>
                         <p className='product-name'>
                             {product.name}

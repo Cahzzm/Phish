@@ -17,7 +17,7 @@ a {
     width: 100vw;
     border-bottom: 2px solid rgb(220, 229, 233);
     align-items: center;
-    z-index: 100;
+    z-index: 1000000;
 }
 
 .phish-home-button {
@@ -38,4 +38,31 @@ a {
     width: 24px;
     margin-right: 10px;
     margin-left: 10px;
+    transition: all .3s ease; /* back to normal */
+}
+
+#phish-shopping-cart:hover {
+    transform: translate3D(0,-1px,0) scale(1.03);
+}
+
+.sell-with-phish {
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.sell-with-phish:hover {
+    color: #5865f2;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 20%);
+    cursor: pointer;
+}
+
+.logout-btn {
+    padding: 3px;
+    border-radius: 10px;
+}
+
+.logout-btn:hover {
+    color: #5865f2;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 20%);
+    cursor: pointer;
 }
