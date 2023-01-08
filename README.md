@@ -5,7 +5,7 @@
 ***
 #Phish
 Phish is an application where users can post products to sell or purchase other products they see in the listings page
-* Link to live [Phish](https://phish.onrender.com/)project.
+* Link to live [Phish](https://phish.onrender.com/) project.
 ***
 
 #### Phish Home Page
@@ -38,6 +38,54 @@ This project was developed by Tyler Short. Below is a brief description of the f
 
 * Rendering the shopping cart: When a user navigates to a single product page theyr are able to add that item to their existing cart which will then take them to their cart displayed with the rest of their added items.
 * Deleting an item: When the logged in user that added a cart item wishes to do so they are able to remove a product from their cart, dynamically updating the price upon removal.
+***
+
+## Getting Started
+Below is how you can get the project started in a local environment
+
+### Prerequisites
+
+You will need to define a .env file for the app to setup a database as well as filepath, and generate a CSRF Token /
+SECRET KEY
+* Example: .env
+  ```sh
+  SECRET_KEY=SECRET_KEY_HERE
+  DATABASE_URL=sqlite:///dev.db
+  SCHEMA=flask_schema
+  FLASK_DEBUG=true
+  ```
+  
+  ### Installation
+
+1. Clone the repo git@github.com:Cahzzm/Phish.git
+   ```sh
+   git clone 
+   ```
+2. Install Backend in /backend Dependencies via requirements.txt
+   ```sh
+   pipenv install -r requirements.txt
+   ```
+3. Install Frontend Dependencies in /frontend/react-app
+   ```sh
+   npm install
+   ```
+4. Get into pipenv, migrate database and seed, run Flask app
+   ```sh
+   pipenv shell
+   ```   
+   ```sh
+   flask db upgrade
+   ```   
+   ```sh
+   flask seed all
+   ```   
+   ```sh
+   flask run
+   ```   
+5. Start up Frontend React-App to connect to Backend
+  ```sh
+  npm start
+   ```
 
 
 ## Technologies Used
