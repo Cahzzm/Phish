@@ -10,6 +10,7 @@
     justify-content: center;
     width: 60%;
     margin-top: 100px;
+    margin-bottom: 50px;
 }
 
 .product-detail-left-container {
@@ -48,8 +49,7 @@
 }
 
 .product-detail-image {
-    width: 500px;
-    height: 500px;
+    width: 100%;
     border-bottom: 3px solid rgb(240, 245, 247);
 }
 
