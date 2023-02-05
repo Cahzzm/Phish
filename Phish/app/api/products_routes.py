@@ -1,8 +1,10 @@
 from flask import Blueprint, jsonify, render_template, request, redirect
 from flask_login import login_required, current_user
 from app.models import db, Product, ProductImage
-from app.forms import ProductUpdateForm, ProductForm
+from app.forms import ProductUpdateForm, ProductForm, ProductSearchForm
 from .auth_routes import validation_errors_to_error_messages
+import json
+from sqlalchemy import or_
 
 
 products_routes = Blueprint("products", __name__)
@@ -98,3 +100,20 @@ def delete_product(id):
     db.session.delete(product)
     db.session.commit()
     return {"message": "Successfully deleted", "status_code": 200}
+
+
+# GET SEARCHED PRODUCTS
+@products_routes.route("/search", methods=["POST", "GET"])
+def get_searched_products():
+    form = ProductSearchForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    search = form.search.data
+    search = f"%{search}%"
+
+    products = Product.query.filter(
+        Product.name.ilike(f"%{search}%")
+    ).all()
+
+    products_to_dict = [p.to_dict() for p in products]
+
+    return {"products": products_to_dict}
