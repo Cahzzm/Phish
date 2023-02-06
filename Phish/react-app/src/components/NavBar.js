@@ -6,6 +6,8 @@ import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getProductsThunk } from '../store/all_products';
+import SearchResults from './SearchResults';
+import UserDropdown from './UserDropdown';
 
 const NavBar = () => {
   const history = useHistory()
@@ -85,6 +87,9 @@ const NavBar = () => {
       </div>
       <div className='search-container'>
         <form onSubmit={fetchSearchResults} className="search-message-form-form">
+          <div>
+
+          </div>
         <input
             onClick={displayDropdown}
             className='search-message-form-input-container'
@@ -94,6 +99,7 @@ const NavBar = () => {
             onChange={updateSearchInputAndDropdown}
             placeholder={`Search`}
           />
+          <i class="fa-solid fa-magnifying-glass"/>
         </form>
         {showDropdown && (
           <div className='search-dropdown'>
@@ -105,6 +111,8 @@ const NavBar = () => {
                     onClick={() => history.push(`/products/${product.id}`)}
                     className='search-result'>
                     {product.name}
+                    <img className='search-image' src={product.productImages[product.id]?.url} alt=''>
+                    </img>
                   </div>
                 )
               })
@@ -120,17 +128,18 @@ const NavBar = () => {
         }
           {sessionUser &&
           <>
-              <NavLink className='sell-with-phish' to='/products/new' exact={true}>
+              <UserDropdown></UserDropdown>
+              {/* <NavLink className='sell-with-phish' to='/products/new' exact={true}>
                 Sell With Phish
-              </NavLink>
+              </NavLink> */}
               <NavLink to='/cart' exact={true}>
                   <img id='phish-shopping-cart' alt='' src='https://res.cloudinary.com/drybvuzux/image/upload/v1672795199/phish-shopping-cart_bqp9cr.svg'></img>
               </NavLink>
           </>
           }
-         {sessionUser &&
+         {/* {sessionUser &&
           <LogoutButton />
-         }
+         } */}
       </div>
     </div>
   );

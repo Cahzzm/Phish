@@ -31,6 +31,9 @@ a {
 .right-side-navbar {
     margin: 20px;
     font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -47,7 +50,9 @@ a {
 
 .sell-with-phish {
     padding: 3px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
+    background-color: white;
+
 }
 
 .sell-with-phish:hover {
@@ -58,11 +63,73 @@ a {
 
 .logout-btn {
     padding: 3px;
-    border-radius: 10px;
+    background-color: white;
 }
 
 .logout-btn:hover {
     color: #5865f2;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 20%);
     cursor: pointer;
+}
+
+.dropdown-main {
+    font-family: sans-serif;
+}
+
+
+.user-dropdown-container {
+    /* top: 68px; */
+    right: 80px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    max-height: 88vh;
+    border: 1px rgb(210, 210, 210) solid;
+    border-top: none;
+    border-radius: 5px;
+    box-shadow: 1px 3px 3px rgba(83, 83, 83, 0.78);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.user-dropdown-button {
+    border-top: 1px solid rgb(210, 210, 210);
+    padding: 20px 0px 20px 10px;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    font-weight: lighter;
+    cursor: pointer;
+    background-color: white;
+    /* overflow: scroll; */
+}
+
+.user-dropdown-button:hover {
+    text-decoration: underline;
+}
+
+.dropdown-arrow {
+    margin: auto auto auto 10px;
+    font-size: 13px;
+    /* transform: rotate(90deg); */
+    /* border: 3px green solid; */
+}
+
+.account-dropdown-button {
+    padding: 3px;
+    border-radius: 10px;
+    /* border:orange 1px solid; */
+}
+
+.account-dropdown-button:hover {
+    color: #5865f2;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 20%);
+    cursor: pointer;
+}
+
+.account-dropdown-button-children {
+    /* border: 1px orange solid; */
+    padding: 5px 16px 5px 16px;
+    display: flex;
 }

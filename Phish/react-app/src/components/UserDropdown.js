@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import './NavBar.css'
+import LogoutButton from './auth/LogoutButton';
 
 const UserDropdown = () => {
     const history = useHistory();
@@ -58,22 +59,17 @@ const UserDropdown = () => {
                             </NavLink>
                         </div>
                     )}
-                    <div
-                        className="user-dropdown-button"
-                        onClick={() => history.push('/coming-soon')}>
-                        Account
-                    </div>
-                    <div
-                        className="user-dropdown-button"
-                        onClick={() => history.push('/coming-soon')}>
-                        Orders
-                    </div>
+                    <NavLink className='sell-with-phish' to='/products/new' exact={true}>
+                Sell With Phish
+              </NavLink>
                     <div
                         className="user-dropdown-button"
                         onClick={() => history.push('/favorites')}>
-                        Favorites
+                        Phishlist
                     </div>
+                    <LogoutButton />
                 </div>
+
             )}
         </div>
     )

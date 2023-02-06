@@ -1,0 +1,129 @@
+.search-form-container {
+    width: 49%;
+    margin: auto;
+    position: relative;
+    /* flex-direction: column;
+    display: flex; */
+}
+
+.search-message-form-form {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px black solid;
+    border-radius: 25px;
+    overflow: hidden;
+    padding-right: 10px;
+}
+
+.search-message-form-input-container {
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    border: none;
+    border-radius: 4px;
+    font-size: large;
+    padding: 0px 8px 0px 8px;
+    /* font-weight: lighter; */
+}
+
+.search-message-form-input-container:focus {
+    outline: none;
+    /* border-bottom: 0px transparent solid; */
+    /* border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; */
+}
+
+.fa-magnifying-glass {
+    /* position: absolute; */
+    right: 10px;
+    font-size: larger;
+    /* color: rgb(28, 73, 194); */
+}
+
+
+.search-dropdown {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 38px;
+    margin-top: 20px;
+    border-top: transparent;
+    border-radius: 6px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    width: 40%;
+    height: fit-content;
+    max-height: 800px;
+    /* margin: auto; */
+    padding: 0;
+    overflow: scroll;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.search-image {
+    float: right;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.search-dropdown::-webkit-scrollbar {
+    width: 6px;
+    color: white;
+}
+
+.search-dropdown::-webkit-scrollbar-track {
+    background-color: lightgray;
+    border-radius: 8px;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 8px;
+  }
+
+.search-result {
+    font-family: sans-serif;
+    width: 100%;
+    padding: 15px 8px 15px 8px;
+    cursor: pointer;
+}
+
+.search-result:hover {
+    background-color: rgba(191, 191, 191, 0.304);
+}
+
+.products-results-container {
+    justify-content: center;
+    width: 100vw;
+    margin-bottom: 134px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.no-search-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    margin-top: 44px;
+}
+
+.no-results-image-container {
+    width: 500px;
+    height: fit-content;
+}
+
+.no-results-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.oops-no-results {
+    margin-top: 22px;
+}
