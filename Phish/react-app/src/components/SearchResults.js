@@ -9,7 +9,7 @@ const SearchResults = () => {
     const searchInput = location.state.searchInput
 
     return (
-        <main clasname="">
+        <main className="">
             {searchResults.length > 0 && <div style={{ 'height': '73px' }} />}
             <div>
                 <div className='products-results-container'>
@@ -46,7 +46,7 @@ const SearchResults = () => {
                         <div className='no-search-results'>
                             <div className='no-results-text'>
                                 <div className='oops oops-no-results'>
-                                    We couldn't sniff that out.
+                                    We couldn't find that.
                                 </div>
                                 <span>
                                     There are no results for “

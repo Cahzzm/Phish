@@ -2,12 +2,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+// import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getProductsThunk } from '../store/all_products';
-import SearchResults from './SearchResults';
+// import SearchResults from './SearchResults';
 import UserDropdown from './UserDropdown';
+import './SearchResults.css'
 
 const NavBar = () => {
   const history = useHistory()
@@ -98,7 +99,8 @@ const NavBar = () => {
             value={searchInput}
             onChange={updateSearchInputAndDropdown}
             placeholder={`Search`}
-          />
+          >
+          </input>
           <i class="fa-solid fa-magnifying-glass"/>
         </form>
         {showDropdown && (

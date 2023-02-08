@@ -1,9 +1,9 @@
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, useHistory } from "react-router-dom/cjs/react-router-dom"
 import { getCartThunk } from "../../store/cart"
-import { editCartItemThunk, removeCartItemThunk } from "../../store/cart_item"
+import { removeCartItemThunk } from "../../store/cart_item"
 import { purchaseCartThunk } from "../../store/cart"
 import './Cart.css'
 
@@ -13,12 +13,7 @@ const Cart = () => {
     const dispatch = useDispatch()
     const cart = useSelector(state => state.cart)
     const cartItems = useSelector(state => state.cart.cartItems)
-    // const [quantity, setQuantity] = useState(1)
-    // const singleProductImage = Object?.values(cartItems?.product)
     const cartItemsArr = Object.values(cartItems || {})
-    // console.log('this is cart', cart.id)
-    // console.log('this is cartItems', cartItems)
-    // console.log('this is the image', singleProductImage)
 
     const getTotal = (cartItemsArr) => {
         let total = 0.00
@@ -106,25 +101,6 @@ const Cart = () => {
                                         </div>
                                     </div>
                                     </NavLink>
-                                        {/* <span>
-                                            Quantity:
-                                            <select
-                                            id="quantity-select"
-                                            type="select"
-                                            value={cartItem.quantity}
-                                            onChange={async (e) => {
-                                                setQuantity(e.target.value)
-                                                await dispatch(editCartItemThunk(cartItem, quantity))
-                                                await dispatch(getCartThunk())
-                                            }}
-                                            >
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </span> */}
                                     <div className="remove-btn-container">
                                         <button className="remove-cartItem-btn" onClick={async (e) => {
                                             e.preventDefault()
@@ -165,8 +141,8 @@ const Cart = () => {
                             <div className="checkout-btn">
                                 <button
                                 onClick={() => {
-                                    dispatch(purchaseCartThunk(cart.id))
-                                    history.push('/')
+                                    dispatch(purchaseCartThunk(getTotal(cartItemsArr), cart.id))
+                                    history.push('/history')
                                     alert('Thank you for wasting - I mean spending your money with us!')
                                 }}
                                 disabled={!cartItemsArr.length}

@@ -10,10 +10,10 @@ carts_routes = Blueprint("carts", __name__)
 @login_required
 def get_cart():
 
-    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).count()
+    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).count()
 
     if existing_cart:
-        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
+        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
 
         return cart.to_dict()
 
@@ -21,7 +21,7 @@ def get_cart():
         cart = Cart(
             user_id=current_user.get_id(),
             total=0,
-            # purchased=False
+            purchased=False
         )
         db.session.add(cart)
         db.session.commit()
@@ -34,15 +34,10 @@ def get_cart():
 @login_required
 def add_cart_item():
 
-    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).count()
+    existing_cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).count()
 
     if existing_cart:
-        print('''
-
-
-
-        ''', existing_cart)
-        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).one()
+        cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
 
         new_cart_item = CartItem(
             cart_id=cart.to_dict()["id"],
@@ -59,7 +54,7 @@ def add_cart_item():
         cart = Cart(
             user_id=current_user.get_id(),
             total=0,
-            # purchased=False
+            purchased=False
         )
         db.session.add(cart)
         db.session.commit()
@@ -95,11 +90,20 @@ def delete_cart_item(id):
     return {'message': 'Successfully deleted', 'status_code': 200}
 
 
-@carts_routes.route("/checkout/<int:id>", methods=["DELETE"])
+@carts_routes.route("/checkout/<int:id>", methods=["PUT"])
 @login_required
 def purchase_cart(id):
+    # cart = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == False).one()
     cart = Cart.query.get(id)
-
-    db.session.delete(cart)
+    setattr(cart, "purchased", True)
+    setattr(cart, "total", request.json['total'])
     db.session.commit()
-    return {'message': 'Successfully deleted', 'status_code': 200}
+    return cart.to_dict()
+
+
+@carts_routes.route("/history")
+@login_required
+def get_history():
+    carts = Cart.query.filter(Cart.user_id == current_user.get_id()).filter(Cart.purchased == True).all()
+
+    return {"OrderHistory": [cart.to_dict() for cart in carts]}

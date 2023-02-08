@@ -60,12 +60,12 @@ const UserDropdown = () => {
                         </div>
                     )}
                     <NavLink className='sell-with-phish' to='/products/new' exact={true}>
-                Sell With Phish
-              </NavLink>
+                        Sell With Phish
+                    </NavLink>
                     <div
                         className="user-dropdown-button"
-                        onClick={() => history.push('/favorites')}>
-                        Phishlist
+                        onClick={() => history.push('/history')}>
+                        Order History
                     </div>
                     <LogoutButton />
                 </div>
