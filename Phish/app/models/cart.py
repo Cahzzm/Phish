@@ -10,7 +10,7 @@ class Cart(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     total = db.Column(db.Integer, nullable=False)
-    # purchased = db.Column(db.Boolean, default=False)
+    purchased = db.Column(db.Boolean, default=False)
 
     cart_items = db.relationship("CartItem", back_populates="item_cart", cascade='all, delete')
     cart_user = db.relationship("User", back_populates="user_cart")
@@ -20,7 +20,7 @@ class Cart(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "total": self.total,
-            # "purchased": self.purchased,
+            "purchased": self.purchased,
             "cartItems": {item.to_dict()["id"]: item.to_dict() for item in self.cart_items},
             "cartUser": self.cart_user.to_dict()
         }

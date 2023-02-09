@@ -14,6 +14,7 @@ import CreateProduct from './components/CreateProduct';
 import EditProduct from './components/EditProduct';
 import Cart from './components/Cart';
 import Footer from './components/Footer/Footer';
+import OrderHistory from './components/OrderHistory';
 import ResourceNotFound from './components/404';
 
 function App() {
@@ -70,6 +71,9 @@ function App() {
         </Route>
         <Route path='/cart' exact={true}>
           <Cart />
+        </Route>
+        <Route path='/history' exact={true}>
+          <OrderHistory />
         </Route>
         <Route>
           <ResourceNotFound />

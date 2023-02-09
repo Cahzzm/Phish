@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { getProductsThunk } from '../store/all_products';
 // import SearchResults from './SearchResults';
 import UserDropdown from './UserDropdown';
+import './SearchResults.css'
 
 const NavBar = () => {
   const history = useHistory()
@@ -98,7 +99,8 @@ const NavBar = () => {
             value={searchInput}
             onChange={updateSearchInputAndDropdown}
             placeholder={`Search`}
-          />
+          >
+          </input>
           <i class="fa-solid fa-magnifying-glass"/>
         </form>
         {showDropdown && (
